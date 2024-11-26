@@ -39,13 +39,10 @@ export const BackgroundGradientAnimation = ({
   const [curY, setCurY] = useState(0);
   const [tgX, setTgX] = useState(0);
   const [tgY, setTgY] = useState(0);
+  
   useEffect(() => {
 
-
       if (typeof document !== "undefined") {
-
-
-      
 
     const root = document.documentElement;
 
