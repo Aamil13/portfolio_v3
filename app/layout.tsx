@@ -23,7 +23,7 @@ export default function RootLayout({
             attribute="class"
             defaultTheme="dark"
             // defaultTheme="system"//add toggle later
-            enableSystem
+            enableSystem={false} // Turn off system detection for SSR consistency
             disableTransitionOnChange
           >
             {children}

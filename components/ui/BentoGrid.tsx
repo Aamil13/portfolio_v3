@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react";
 import { IoCopyOutline } from "react-icons/io5";
-import Lottie from "react-lottie";
+import Lottie from "react-lottie-player";
 import { cn } from "@/utils/cn";
 // import { BackgroundGradientAnimation } from "./GradientBg";
 
@@ -59,14 +59,7 @@ export const BentoGridItem = ({
 
   const [copied, setCopied] = useState(false);
 
-  const defaultOptions = {
-    loop: copied,
-    autoplay: copied,
-    animationData: animationData,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
+
 
   const handleCopy = () => {
     const text = "aamilshafi13@gmail.com";
@@ -159,7 +152,8 @@ export const BentoGridItem = ({
           </div>
 
           {/* for the github 3d globe */}
-          {id === 2 &&<div><GridGlobe /> <div className="flex flex-col gap-1 items-start mt-2 text-[8px]">
+          {/* {id === 2 &&<div><GridGlobe /> <div className="flex flex-col gap-1 items-start mt-2 text-[8px]"> */}
+          {id === 2 &&<div><div className="flex flex-col gap-1 items-start mt-2 text-[8px]">
             <div  onClick={()=>window.open('https://www.freecodecamp.org/certification/fcc88fba7b7-32b5-475a-b18a-cc5d9d2c74ff/front-end-development-libraries', '_blank')}>
             <MagicButton
               title="Front-End(freeCodeCamp.org)"
@@ -198,7 +192,12 @@ export const BentoGridItem = ({
               >
                 {/* <img src="/confetti.gif" alt="confetti" /> */}
                 {copied ?
-                <Lottie options={defaultOptions} height={200} width={400} />
+                <Lottie
+                loop
+                animationData={animationData}
+                play
+                style={{ width: 400, height: 400 }}
+              />
               : null}
                 </div>
 
