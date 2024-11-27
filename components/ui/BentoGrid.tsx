@@ -1,11 +1,8 @@
+"use client"
 import { useEffect, useState } from "react";
 import { IoCopyOutline } from "react-icons/io5";
-import dynamic from "next/dynamic";
-
 import Lottie from "react-lottie";
-
 import { cn } from "@/utils/cn";
-
 import { BackgroundGradientAnimation } from "./GradientBg";
 
 import GridGlobe from "./GridGlobe";
