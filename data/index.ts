@@ -83,8 +83,8 @@ export const navItems = [
     img: "https://res.cloudinary.com/dgl8zmniq/image/upload/q_auto,f_auto/v1732631417/Portfolio_Projects/nextBookingAdmin_q4q6y8.png",
     title: "Booking Admin Portal",
     description: "Hotel reservation Admin panel to create,update,delete and manage hotels/rooms/user and security with JWT.",
-    link: "https://nextbookingappmern.vercel.app/",
-    git: "https://github.com/Aamil13/Booking_app_Frontend",
+    link: "https://nextbookingadmin.netlify.app/",
+    git: "https://github.com/Aamil13/Booking_app_Admin",
     stack: [
       "TypeScript", "NodeJS", "Express", 
       "MongoDB", "ReactJS","Vite" ,"Zustand","FramerMotion" , "TailwindCSS","ANTD"
