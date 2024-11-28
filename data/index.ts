@@ -227,65 +227,8 @@ export const navItems = [
   ];
   
 
-  export const communityProject= [
-    {
-      id: 1,
-      title: "Css Glassmorphism Generator",
-      des: "React based web app to generate professional glassmorphism css effects.",
-      img: "https://res.cloudinary.com/ddtn2fy4b/image/upload/v1726248577/glass-sc_w4eoly.webp",
-      iconLists: ["/re.svg", "/tail.svg"],
-      link: "https://glass.programivity.com",
-    },
-    {
-      id: 2,
-      title: "Css Shadow Generator",
-      des: "React based web app to generate professional css box & text shadows.",
-      img: "https://res.cloudinary.com/ddtn2fy4b/image/upload/v1726248576/shadow-sc_twsz9g.webp",
-      iconLists: ["/re.svg", "/tail.svg"],
-      link: "https://shadows.programivity.com",
-    },
-    {
-      id: 3,
-      title: "Css Gradient Generator",
-      des: "React based web app to generate professional css/png gradients.",
-      img: "https://res.cloudinary.com/ddtn2fy4b/image/upload/v1726248576/gradient-sc_kvaqjx.webp",
-      iconLists: ["/re.svg", "/tail.svg"],
-      link: "https://gradients.programivity.com",
-    },
-  ]
   
-  export const testimonials = [
-    {
-      quote:
-        "Collaborating with Adrian was an absolute pleasure. His professionalism, promptness, and dedication to delivering exceptional results were evident throughout our project. Adrian's enthusiasm for every facet of development truly stands out. If you're seeking to elevate your website and elevate your brand, Adrian is the ideal partner.",
-      name: "Michael Johnson",
-      title: "Director of AlphaStream Technologies",
-    },
-    {
-      quote:
-        "Collaborating with Adrian was an absolute pleasure. His professionalism, promptness, and dedication to delivering exceptional results were evident throughout our project. Adrian's enthusiasm for every facet of development truly stands out. If you're seeking to elevate your website and elevate your brand, Adrian is the ideal partner.",
-      name: "Michael Johnson",
-      title: "Director of AlphaStream Technologies",
-    },
-    {
-      quote:
-        "Collaborating with Adrian was an absolute pleasure. His professionalism, promptness, and dedication to delivering exceptional results were evident throughout our project. Adrian's enthusiasm for every facet of development truly stands out. If you're seeking to elevate your website and elevate your brand, Adrian is the ideal partner.",
-      name: "Michael Johnson",
-      title: "Director of AlphaStream Technologies",
-    },
-    {
-      quote:
-        "Collaborating with Adrian was an absolute pleasure. His professionalism, promptness, and dedication to delivering exceptional results were evident throughout our project. Adrian's enthusiasm for every facet of development truly stands out. If you're seeking to elevate your website and elevate your brand, Adrian is the ideal partner.",
-      name: "Michael Johnson",
-      title: "Director of AlphaStream Technologies",
-    },
-    {
-      quote:
-        "Collaborating with Adrian was an absolute pleasure. His professionalism, promptness, and dedication to delivering exceptional results were evident throughout our project. Adrian's enthusiasm for every facet of development truly stands out. If you're seeking to elevate your website and elevate your brand, Adrian is the ideal partner.",
-      name: "Michael Johnson",
-      title: "Director of AlphaStream Technologies",
-    },
-  ];
+
   
   export const companies = [
     {
@@ -348,7 +291,7 @@ export const navItems = [
     },
     {
       id: 3,
-      title: "Web Developer Intern at Reverr (07/2023 - 02/2023)",
+      title: "Web Developer Intern at Reverr (07/2023 - 02/2024)",
       // desc: "Started as Intern and because of the performance, promoted to full-time after 4 months. Worked on multiple projects from scratch. Communicated with clients for project updates and modifications. Lead the team of other developer. Took interviews for development roles of freshers and interns.",
         desc:["Designed and developed responsive UI components to enhance the user experience.",
               "Built new backend features and implemented the WhatsApp Cloud API to send templates and receive messages seamlessly.",
