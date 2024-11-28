@@ -26,17 +26,7 @@ export const navItems = [
       id: 2,
       title: "Certifications in Front-End and Back-End",
       description: "",
-      className: "lg:col-span-2 md:col-span-3 md:row-span-2",
-      imgClassName: "",
-      titleClassName: "justify-start",
-      img: "",
-      spareImg: "",
-    },
-    {
-      id: 3,
-      title: "Tech stack",
-      description: "",
-      className: "lg:col-span-2 md:col-span-3 md:row-span-2",
+      className: "lg:col-span-2 md:col-span-3 row-span-1",
       imgClassName: "",
       titleClassName: "justify-start",
       img: "",
@@ -49,9 +39,20 @@ export const navItems = [
       className: "lg:col-span-2 md:col-span-3 md:row-span-1",
       imgClassName: "",
       titleClassName: "justify-start",
-      img: "/grid.svg",
+
       spareImg: "/b4.svg",
     },
+    {
+      id: 3,
+      title: "Tech stack",
+      description: "",
+      className: "lg:col-span-2 md:col-span-3 md:row-span-2",
+      imgClassName: "",
+      titleClassName: "justify-start",
+      img: "",
+      spareImg: "",
+    },
+   
   
     {
       id: 5,
@@ -61,7 +62,7 @@ export const navItems = [
       imgClassName: "absolute right-0 bottom-0 md:w-96 w-60",
       titleClassName: "justify-center md:justify-start lg:justify-center",
       img: "/b5.svg",
-      spareImg: "/grid.svg",
+
     },
     {
       id: 6,
@@ -69,7 +70,7 @@ export const navItems = [
       description: "",
       className: "lg:col-span-6 md:col-span-6 md:row-span-1 ",
       imgClassName: "",
-      titleClassName: "justify-center md:max-w-full max-w-60 text-center",
+      titleClassName: "justify-center items-center md:max-w-full max-w-60 text-center",
       img: "",
       spareImg: "",
     },

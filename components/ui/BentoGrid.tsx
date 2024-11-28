@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { IoCopyOutline } from "react-icons/io5";
 import Lottie from "react-lottie-player";
 import { cn } from "@/utils/cn";
-// import { BackgroundGradientAnimation } from "./GradientBg";
+import { BackgroundGradientAnimation } from "./GradientBg";
 
-// import GridGlobe from "./GridGlobe";
+
 import animationData from "@/data/confetti.json";
 import MagicButton from "./MagicButton";
 import {motion} from 'framer-motion'
@@ -128,9 +128,9 @@ export const BentoGridItem = ({
         </div>
         {id === 6 && (
           // add background animation , remove the p tag
-          // <BackgroundGradientAnimation>
+          <BackgroundGradientAnimation >
             <div className="absolute z-50 inset-0 flex items-center justify-center text-white font-bold px-4 pointer-events-none text-3xl text-center md:text-4xl lg:text-7xl"></div>
-          // </BackgroundGradientAnimation>
+        </BackgroundGradientAnimation>
         )}
 
         <div
@@ -152,7 +152,7 @@ export const BentoGridItem = ({
           </div>
 
           {/* for the github 3d globe */}
-          {/* {id === 2 &&<div><GridGlobe /> <div className="flex flex-col gap-1 items-start mt-2 text-[8px]"> */}
+          
           {id === 2 &&<div><div className="flex flex-col gap-1 items-start mt-2 text-[8px]">
             <div  onClick={()=>window.open('https://www.freecodecamp.org/certification/fcc88fba7b7-32b5-475a-b18a-cc5d9d2c74ff/front-end-development-libraries', '_blank')}>
             <MagicButton
