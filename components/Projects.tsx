@@ -60,13 +60,13 @@ const Projects = ({ projects }: any) => {
       </h1>
 
       {/* Category Filters */}
-      <div className="flex justify-center gap-4 mt-5 max-sm:overflow-x-scroll max-sm:overflow-y-clip">
+      <div className="flex justify-start items-center gap-4 mt-5 max-sm:overflow-x-scroll max-sm:overflow-y-clip  mx-auto">
         {categories.map((category, index) => (
              <div
              key={category + index}
             onClick={() => handleCategoryChange(category)}
-             className="bg-indigo-400  flex items-center justify-center rounded-[6px]">
-             <button className={`px-6 py-2 font-medium rounded-[6px] ${selectedCategory === category ? "bg-indigo-900" : "bg-indigo-800"}  active:scale-105 text-white w-fit transition-all shadow-[3px_3px_0px_black] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]`}>
+             className="bg-indigo-400  flex flex-shrink-0 items-center justify-center rounded-[6px] ">
+             <button className={`  px-6 py-2 font-medium rounded-[6px] ${selectedCategory === category ? "bg-indigo-900" : "bg-indigo-800"}  active:scale-105 text-white w-fit transition-all shadow-[3px_3px_0px_black] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]`}>
              {category}
              </button>
            </div>
@@ -111,7 +111,7 @@ const Projects = ({ projects }: any) => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.3 }}
-        className="group   flex flex-col lg:flex-row items-center justify-between  rounded-2xl shadow-lg overflow-hidden max-lg:w-[600px] max-md:w-[500px] max-sm:w-[350px] w-[827px] h-[20rem] "
+        className="group   flex flex-col lg:flex-row items-center justify-between  rounded-2xl shadow-lg overflow-hidden max-lg:w-[600px] max-md:w-[500px] max-sm:w-[350px] w-[827px] h-[20rem] max-sm:h-[30rem]  "
     
       >
         {/* Image Section */}
@@ -119,7 +119,7 @@ const Projects = ({ projects }: any) => {
   <img
     src={item.img}
     alt={item.title}
-    className={`w-11/12 h-5/6  object-cover ${idx == 0 ? "object-left" : "object-top"}  absolute -left-10 -bottom-2 -rotate-13 -translate-x-10 -translate-y-2 transition-all duration-500 transform group-hover:rotate-3 group-hover:translate-x-10 group-hover:translate-y-10 rounded-t-2xl`}
+    className={`w-11/12 h-5/6   object-cover ${idx == 0 ? "object-left" : "object-top"}  absolute -left-10 -bottom-2 -rotate-13 -translate-x-10 -translate-y-2 transition-all duration-500 transform group-hover:rotate-3 group-hover:translate-x-10 group-hover:translate-y-10 rounded-t-2xl`}
   />
 </div>
 

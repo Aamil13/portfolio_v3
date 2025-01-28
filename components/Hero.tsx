@@ -9,7 +9,7 @@ import { BackgroundLines } from './ui/BackgroundLines'
 
 const Hero = () => {
   return (
-    <div  className='pb-20 pt-2'>
+    <div  className='pb-20 pt-2 max-sm:mt-28'>
 
         
         <div>
