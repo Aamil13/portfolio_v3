@@ -266,7 +266,7 @@ export const navItems = [
   export const workExperience = [
     {
       id: 1,
-      title: "Software Development Engineer-1 (SDE-1) at Unibuzz Networks Pvt. Ltd (08/2023 - Present)",
+      title: "Software Development Engineer-1 (SDE-1) at Unibuzz Networks Pvt. Ltd (08/2024 - Present)",
       desc: [
         "Promoted to SDE-1 for significant contributions to the platform's development.",
         "Currently working on building and maintaining the v2-client and backend in collaboration with the CTO.",
@@ -279,7 +279,7 @@ export const navItems = [
     },
     {
       id: 2,
-      title: "Web Developer Intern at Unibuzz Networks Pvt. Ltd (04/2023 - 07/2023)",
+      title: "Web Developer Intern at Unibuzz Networks Pvt. Ltd (04/2024 - 07/2024)",
       desc: [
         "Contributed to building the MVP for a LinkedIn-like platform tailored for students and universities using the MERN stack with TypeScript.",
         "Designed and developed a responsive frontend using Next.js, React Query, React Hook Forms, TailwindCSS, and Framer Motion, delivering a seamless user experience with dynamic animations.",
