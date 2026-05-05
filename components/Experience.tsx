@@ -1,11 +1,16 @@
 "use client"
 import React from "react";
 
-import { workExperience } from "@/data";
 import { Button } from "./ui/MovingBorders";
 import { motion } from "framer-motion"
 
-const Experience = () => {
+type ExperienceCard = {
+  id: number;
+  title: string;
+  desc: string[];
+};
+
+const Experience = ({ workExperience }: { workExperience: ExperienceCard[] }) => {
   return (
     <div className="py-20 w-full">
       <h1 className="heading" id="experience">

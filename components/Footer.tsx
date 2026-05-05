@@ -1,10 +1,15 @@
 "use client";
 import { FaLocationArrow } from "react-icons/fa6";
 
-import { socialMedia } from "@/data";
 import MagicButton from "./ui/MagicButton";
 
-const Footer = () => {
+type SocialLink = {
+  id: number;
+  link: string;
+  img: string;
+};
+
+const Footer = ({ socialMedia }: { socialMedia: SocialLink[] }) => {
   return (
     <footer className="w-full pt-20 pb-10 relative">
       {/* background grid */}

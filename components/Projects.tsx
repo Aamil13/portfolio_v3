@@ -1,44 +1,92 @@
-"use client"
+"use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { Button } from "./ui/MovingBorders";
 
-const techColors: { [key: string]: string } = {
-  TypeScript: "#3178C6",
-  JavaScript: "#F7DF1E",
-  NodeJS: "#43853D",
-  Express: "#000000",
-  MongoDB: "#47A248",
-  ReactJS: "#61DAFB",
-  Redux: "#764ABC",
-  "Redux/Toolkit": "#764ABC",
-  Zustand: "#764ABC",
-  TailwindCSS: "#38B2AC",
-  Bootstrap: "#563D7C",
-  Firebase: "#FFCA28",
-  MaterialUI: "#0081CB",
-  Vite: "#646CFF",
-  DaisyUI: "#5A67D8",
-  ANTD: "#5A67D8",
-  SCSS: "#CF649A",
-  FramerMotion: "#E01D5A",
+import {
+  SiTypescript,
+  SiJavascript,
+  SiNodedotjs,
+  SiExpress,
+  SiMongodb,
+  SiReact,
+  SiNextdotjs,
+  SiRedux,
+  SiTailwindcss,
+  SiFirebase,
+  SiDocker,
+  SiRedis,
+  SiAmazon,
+  SiSocketdotio,
+  SiReactquery,
+} from "react-icons/si";
+
+// --------------------
+// Tech Meta System
+// --------------------
+type TechMeta = {
+  color: string;
+  icon?: React.ReactNode;
 };
 
-const categories = [ "Featured", "Fullstack", "Frontend","Backend","All"]; // Example categories
-const itemsPerPage = 4; // Number of projects per page
+const techMeta: Record<string, TechMeta> = {
+  TypeScript: { color: "#3178C6", icon: <SiTypescript /> },
+  JavaScript: { color: "#F7DF1E", icon: <SiJavascript /> },
+  "Node.js": { color: "#43853D", icon: <SiNodedotjs /> },
+  "Express.js": { color: "#000000", icon: <SiExpress /> },
+  MongoDB: { color: "#47A248", icon: <SiMongodb /> },
+  "React.js": { color: "#61DAFB", icon: <SiReact /> },
+  "Next.js": { color: "#ffffff", icon: <SiNextdotjs /> },
+  Redux: { color: "#764ABC", icon: <SiRedux /> },
+  TailwindCSS: { color: "#38B2AC", icon: <SiTailwindcss /> },
+  Firebase: { color: "#FFCA28", icon: <SiFirebase /> },
+  Docker: { color: "#2496ED", icon: <SiDocker /> },
+  Redis: { color: "#DC382D", icon: <SiRedis /> },
+  AWS: { color: "#FF9900", icon: <SiAmazon /> },
+  "Socket.IO": { color: "#ffffff", icon: <SiSocketdotio /> },
+  "TanStack Query": { color: "#FF4154", icon: <SiReactquery /> },
+};
 
-const Projects = ({ projects }: any) => {
+// Normalize helper
+const normalizeTech = (tech: string) =>
+  tech.toLowerCase().replace(/\s+/g, "").replace(".", "");
+
+const normalizedTechMeta: Record<string, TechMeta> = Object.fromEntries(
+  Object.entries(techMeta).map(([key, value]) => [
+    normalizeTech(key),
+    value,
+  ])
+);
+
+// --------------------
+
+const categories = ["Featured", "Fullstack", "Frontend", "Backend", "All"];
+const itemsPerPage = 4;
+
+type Project = {
+  id?: string;
+  img: string;
+  title: string;
+  description: string;
+  link: string;
+  git: string;
+  stack: string[];
+  type: string;
+};
+
+const Projects = ({ projects }: { projects: Project[] }) => {
   const [selectedCategory, setSelectedCategory] = useState("Featured");
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Filter projects based on category
-  const filteredProjects = projects.filter(
-    (item: any) =>
-       item.type.includes(selectedCategory)
-  );
+  // ✅ FIXED FILTER
+  const filteredProjects =
+    selectedCategory === "All"
+      ? projects
+      : projects.filter((item) =>
+          item.type.includes(selectedCategory)
+        );
 
-  // Pagination logic
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentProjects = filteredProjects.slice(
     startIndex,
@@ -46,149 +94,144 @@ const Projects = ({ projects }: any) => {
   );
   const totalPages = Math.ceil(filteredProjects.length / itemsPerPage);
 
-  // Handle Category Change
-  const handleCategoryChange = (category: any) => {
+  const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
-    setCurrentPage(1); // Reset to page 1
+    setCurrentPage(1);
   };
 
   return (
     <div className="py-20">
       <h1 className="heading" id="projects">
-        A  selection of{" "}
+        A selection of{" "}
         <span className="text-purple">{selectedCategory} projects</span>
       </h1>
 
-      {/* Category Filters */}
-      <div className="flex justify-start items-center gap-4 mt-5 max-sm:overflow-x-scroll max-sm:overflow-y-clip  mx-auto">
-        {categories.map((category, index) => (
-             <div
-             key={category + index}
+      {/* Filters */}
+      <div className="flex gap-4 mt-5 overflow-x-auto">
+        {categories.map((category) => (
+          <button
+            key={category}
             onClick={() => handleCategoryChange(category)}
-             className="bg-indigo-400  flex flex-shrink-0 items-center justify-center rounded-[6px] ">
-             <button className={`  px-6 py-2 font-medium rounded-[6px] ${selectedCategory === category ? "bg-indigo-900" : "bg-indigo-800"}  active:scale-105 text-white w-fit transition-all shadow-[3px_3px_0px_black] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]`}>
-             {category}
-             </button>
-           </div>
-        //   <button
-        //     key={index}
-        //     onClick={() => handleCategoryChange(category)}
-        //     className={`px-4 py-2 rounded-lg ${
-        //       selectedCategory === category
-        //         ? "bg-purple text-white"
-        //         : "bg-gray-200"
-        //     }`}
-        //   >
-        //     {category}
-        //   </button>
+            className={`px-5 py-2 rounded-md text-sm transition-all shadow-[3px_3px_0px_black]
+              ${
+                selectedCategory === category
+                  ? "bg-indigo-900"
+                  : "bg-indigo-800"
+              }
+              hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none`}
+          >
+            {category}
+          </button>
         ))}
       </div>
 
-  {/* Projects Display */}
-<div className="flex flex-col items-center justify-center gap-10 mt-10">
-  <AnimatePresence>
-    {currentProjects.map((item: any,idx:number) => (
-          <Button
-          key={item?.title}
-          //   random duration will be fun , I think , may be not
-          duration={Math.floor(Math.random() * 10000) + 10000}
-          borderRadius="1.75rem"
-          style={{
-            //   add these two
-            //   you can generate the color from here https://cssgradient.io/
-            background: "rgb(4,7,29)",
-            backgroundColor:
-              "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
-            // add this border radius to make it more rounded so that the moving border is more realistic
-            borderRadius: `calc(1.75rem* 0.96)`,
-          }}
-          // remove bg-white dark:bg-slate-900
-          className="flex-1 text-black dark:text-white border-neutral-200 dark:border-slate-800"
-        >
-      <motion.div
-        key={item.id}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.3 }}
-        className="group   flex flex-col lg:flex-row items-center justify-between  rounded-2xl shadow-lg overflow-hidden max-lg:w-[600px] max-md:w-[500px] max-sm:w-[350px] w-[827px] h-[20rem] max-sm:h-[30rem]  "
-    
-      >
-        {/* Image Section */}
-        <div className="lg:w-1/2 w-full h-full relative overflow-hidden ">
-  <img
-    src={item.img}
-    alt={item.title}
-    className={`w-11/12 h-5/6   object-cover ${idx == 0 ? "object-left" : "object-top"}  absolute -left-10 -bottom-2 -rotate-13 -translate-x-10 -translate-y-2 transition-all duration-500 transform group-hover:rotate-3 group-hover:translate-x-10 group-hover:translate-y-10 rounded-t-2xl`}
-  />
-</div>
-
-        {/* Content Section */}
-        <div className="lg:w-1/2  w-full h-full px-5 flex flex-col justify-center">
-          {/* Project Title */}
-          <h1 className="font-bold text-2xl text-white mb-3">{item.title}</h1>
-
-          {/* Project Description */}
-          <p
-            className="text-sm lg:text-base  mb-4 line-clamp-3 text-neutral-400"
-          
-          >
-            {item.description}
-          </p>
-
-          {/* Tech Stack */}
-          <div className="flex flex-wrap gap-2 mb-4">
-            {item?.stack?.map((tech: string, index: number) => (
-              <span
-                key={index}
-                className="px-3 py-1 rounded-full text-white text-xs"
-                style={{
-                  backgroundColor: techColors[tech] || "#555555",
-                }}
+      {/* Projects */}
+      <div className="flex flex-col gap-10 mt-10">
+        <AnimatePresence>
+          {currentProjects.map((item, idx) => (
+            <Button
+              key={item.title}
+              duration={15000}
+              borderRadius="1.75rem"
+              className="border-neutral-200 dark:border-slate-800"
+            >
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -30 }}
+                transition={{ type: "spring", stiffness: 100 }}
+                className="group flex flex-col lg:flex-row rounded-2xl overflow-hidden w-full h-[20rem] max-sm:h-[30rem]"
               >
-                {tech}
-              </span>
-            ))}
-          </div>
+                {/* Image */}
+                <div className="lg:w-1/2 w-full h-full relative">
+                  <img
+                    src={item.img}
+                    alt={item.title}
+                    className="absolute w-11/12 h-5/6 object-cover -left-10 -bottom-2 -rotate-8 transition-all duration-500 group-hover:rotate-3 group-hover:translate-x-10 group-hover:translate-y-10 rounded-xl"
+                  />
+                </div>
 
-          {/* Check Live Button */}
-          <div className="flex flex-col gap-2 items-center relative ">
-            <Link
-              href={item?.link}
-              target="_blank"
-              className="text-purple flex items-center hover:underline"
-            >
-            Check Live
-            </Link>
-            <Link
-              href={item?.git}
-              target="_blank"
-              className="text-purple flex items-center hover:underline"
-            >
-           Git Link
-            </Link>
-          </div>
-        </div>
-      </motion.div>
-      </Button>
-    ))}
-    
-  </AnimatePresence>
-</div>
+                {/* Content */}
+                <div className="lg:w-1/2 w-full px-6 flex flex-col justify-center">
+                  <h2 className="text-2xl font-bold text-white mb-2">
+                    {item.title}
+                  </h2>
 
-      {/* Pagination Controls */}
-      <div className="flex justify-center gap-4 mt-10">
-        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
-            if(totalPages < 2) return
-         return <button
-            key={page}
-            onClick={() => setCurrentPage(page)}
-            className={`px-4 py-2 font-medium  rounded-[6px] ${currentPage === page ? "bg-indigo-900" : "bg-indigo-800"}  active:scale-105 text-white w-fit transition-all shadow-[3px_3px_0px_black] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px]`}
-          
-          >
-            {page}
-          </button>
-})}
+                  <p className="text-sm text-neutral-400 mb-4 line-clamp-3">
+                    {item.description}
+                  </p>
+
+                  {/* 🚀 TECH BADGES */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {item.stack.map((tech, i) => {
+                      const meta =
+                        normalizedTechMeta[normalizeTech(tech)] || {
+                          color: "#6B7280",
+                        };
+
+                      return (
+                        <motion.span
+                          key={i}
+                          whileHover={{
+                            scale: 1.08,
+                            boxShadow: `0 0 10px ${meta.color}`,
+                          }}
+                          className="flex items-center gap-1 px-3 py-1 rounded-full text-xs border font-medium transition-all"
+                          style={{
+                            color: meta.color,
+                            borderColor: `${meta.color}50`,
+                            backgroundColor: `${meta.color}15`,
+                          }}
+                        >
+                          <span className="text-sm">
+                            {meta.icon}
+                          </span>
+                          {tech}
+                        </motion.span>
+                      );
+                    })}
+                  </div>
+
+                  {/* Links */}
+                  <div className="flex gap-4">
+                    <Link
+                      href={item.link}
+                      target="_blank"
+                      className="text-purple hover:underline"
+                    >
+                      Live
+                    </Link>
+                    <Link
+                      href={item.git}
+                      target="_blank"
+                      className="text-purple hover:underline"
+                    >
+                      GitHub
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
+            </Button>
+          ))}
+        </AnimatePresence>
+      </div>
+
+      {/* Pagination */}
+      <div className="flex justify-center gap-3 mt-10">
+        {totalPages > 1 &&
+          Array.from({ length: totalPages }, (_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentPage(i + 1)}
+              className={`px-4 py-2 rounded-md ${
+                currentPage === i + 1
+                  ? "bg-indigo-900"
+                  : "bg-indigo-800"
+              }`}
+            >
+              {i + 1}
+            </button>
+          ))}
       </div>
     </div>
   );
