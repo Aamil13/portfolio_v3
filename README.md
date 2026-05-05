@@ -1,24 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This portfolio runs on Next.js with a MongoDB backend (Mongoose). Portfolio content is loaded from the database, so you can update content without editing frontend files.
 
 ## Getting Started
 
-First, run the development server:
+1. Create environment file:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.example .env.local
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Add your Mongo connection string to `.env.local`:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+MONGODB_URI=your_mongodb_connection_string
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. Install dependencies and run the development server:
+
+```bash
+npm install
+npm run dev
+```
+
+4. Ensure portfolio document exists in your MongoDB database.
+
+Open [http://localhost:3002](http://localhost:3002) with your browser.
+
+## API Endpoints
+
+- `GET /api/portfolio` - get portfolio document from MongoDB
+- `PUT /api/portfolio` - update portfolio document
 
 ## Learn More
 

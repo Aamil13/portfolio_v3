@@ -52,10 +52,50 @@ export const BentoGridItem = ({
   titleClassName?: string;
   spareImg?: string;
 }) => {
-  const clintLists = ["ReactJS", "Next Js", "TypeScript/JavaScript", "Redux-Toolkit","Zustand"];
-  const server_DBLists = ["Node", "Express","MongoDB", ""];
-  const tech = ["Socket.io","React-Query","React-Hook-Form"];
-  const otherLists = [,"tailwindCSS", "Framer Motion", "Git","GitHub"];
+  const clintLists = ["JavaScript (ES6+)", "TypeScript"];
+  const server_DBLists = [
+    "React.js",
+    "Next.js",
+    "React Native (CLI, Expo)",
+    "Zustand",
+    "Redux Toolkit",
+    "Context API",
+    "React Hook Form",
+    "TailwindCSS",
+    "TanStack Query",
+  ];
+  const tech = [
+    "Node.js",
+    "Express.js",
+    "REST APIs",
+    "JWT Authentication",
+    "Joi Validation",
+    "Socket.IO",
+    "BullMQ",
+    "Message Broker",
+    "Redis",
+    "AWS (EC2, S3, SQS)",
+    "Docker",
+    "CI/CD",
+    "Firebase",
+    "Cloudinary",
+  ];
+  const otherLists = [
+    "Git",
+    "GitHub",
+    "Jira",
+    "Trello",
+    "SMTP",
+    "SendGrid",
+    "VS Code",
+    "Cursor",
+    "Claude Code",
+    "SEO",
+    "AI Integration (OpenAI/Gemini APIs, Ollama)",
+    "Payment Integration",
+    "Push Notifications",
+    "Play Store Deployment",
+  ];
 
   const [copied, setCopied] = useState(false);
 
@@ -82,7 +122,7 @@ export const BentoGridItem = ({
     <div
       className={cn(
         // remove p-4 rounded-3xl dark:bg-black dark:border-white/[0.2] bg-white  border border-transparent, add border border-white/[0.1] overflow-hidden relative
-        "row-span-1 relative overflow-hidden rounded-3xl border border-white/[0.1] group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none justify-between flex flex-col space-y-4",
+        "row-span-1 relative overflow-hidden rounded-3xl border border-indigo-400/30 bg-[#0B0F2A]/90 p-4 shadow-[0_0_30px_rgba(99,102,241,0.15)]  group/bento hover:shadow-xl transition duration-200  justify-between flex flex-col space-y-4",
         className
       )}
       style={{
@@ -140,13 +180,13 @@ export const BentoGridItem = ({
           )}
         >
           {/* change the order of the title and des, font-extralight, remove text-xs text-neutral-600 dark:text-neutral-300 , change the text-color */}
-          <div className="font-sans font-extralight md:max-w-32 md:text-xs lg:text-base text-sm text-[#C1C2D3] z-10">
+          <div className={`font-sans font-extralight md:text-xs lg:text-base text-sm text-[#C1C2D3] z-10 ${id === 3 ? "max-w-full" : "md:max-w-32"}`}>
             {description}
           </div>
           {/* add text-3xl max-w-96 , remove text-neutral-600 dark:text-neutral-300*/}
           {/* remove mb-2 mt-2 */}
           <div
-            className={`font-sans text-lg lg:text-3xl max-w-96 font-bold z-10`}
+            className={`font-sans text-lg lg:text-3xl font-bold z-10 ${id === 3 ? "max-w-full text-2xl lg:text-4xl mb-2" : "max-w-96"}`}
           >
             {title}
           </div>
