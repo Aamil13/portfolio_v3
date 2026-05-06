@@ -19,7 +19,7 @@ const Footer = ({ socialMedia }: { socialMedia: SocialLink[] }) => {
         Thanks for visiting my portfolio site.
         </h1>
         <p className="text-white-200 md:mt-10 my-5 text-center">
-        This Portfolio is developed using Next Js, TypeScript, Tailwind css, Framer Motion, Three Js e.t.c
+        This Portfolio is developed using Next Js, TypeScript, Tailwind css, Framer Motion.
         </p>
         <a href="#contact">
           <MagicButton
