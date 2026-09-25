@@ -1,0 +1,60 @@
+import type { TechStackGroup } from "@/types/portfolio";
+
+export const defaultTechStack: TechStackGroup[] = [
+  {
+    title: "Languages",
+    items: ["JavaScript (ES6+)", "TypeScript"],
+  },
+  {
+    title: "Frontend / Mobile",
+    items: [
+      "React.js",
+      "Next.js",
+      "React Native (CLI, Expo)",
+      "Zustand",
+      "Redux Toolkit",
+      "Context API",
+      "React Hook Form",
+      "TailwindCSS",
+      "TanStack Query",
+    ],
+  },
+  {
+    title: "Backend / Cloud",
+    items: [
+      "Node.js",
+      "Express.js",
+      "REST APIs",
+      "JWT Authentication",
+      "Joi Validation",
+      "Socket.IO",
+      "BullMQ",
+      "Message Broker",
+      "Redis",
+      "AWS (EC2, S3, SQS)",
+      "Docker",
+      "CI/CD",
+      "Firebase",
+      "Cloudinary",
+    ],
+  },
+  {
+    title: "Tools / Other",
+    items: [
+      "Git",
+      "GitHub",
+      "Jira",
+      "Trello",
+      "SMTP",
+      "SendGrid",
+      "VS Code",
+      "Cursor",
+      "Claude Code",
+      "SEO",
+      "AI Integration (OpenAI/Gemini APIs, Ollama)",
+      "Payment Integration",
+      "Push Notifications",
+      "Play Store Deployment",
+    ],
+  },
+];
