@@ -20,7 +20,7 @@ export function Hero({isOpenToWork}:{isOpenToWork:boolean}) {
       <Reveal className="reveal-d1">
         <p className="lede">
           Hi, I&apos;m Aamil — a software engineer with hands-on experience
-          across product-based startups, currently working as an SDE‑1 building
+          across product-based startups, last working as an SDE‑1 building
           real-time, full-stack products.
         </p>
       </Reveal>
@@ -91,7 +91,7 @@ export function Hero({isOpenToWork}:{isOpenToWork:boolean}) {
               <rect x="3" y="4" width="18" height="14" rx="2" />
               <path d="M8 21h8M12 18v3" />
             </svg>
-            <div className="flabel">React, Next.js, Node.js, AWS</div>
+            <div className="flabel">React, Next.js, React Native, Node.js, AWS</div>
             <span className="arrow">
               <svg
                 width="14"

@@ -22,9 +22,13 @@ export type Project = {
   git?: string;
   stack?: string[];
   features?: string[];
+  img?: string[];
+  "be-stack"?: string[];
+  "be-git"?: string;
+  "be-description"?: string;
+  "be-features"?: string[];
   category?: string;
   type?: string | string[];
-  img?: string;
 };
 
 export type WorkExperience = {

@@ -1,7 +1,14 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { Project } from "@/types/portfolio";
+
+type CarouselState = {
+  images: string[];
+  index: number;
+  title: string;
+};
+
 
 type ProjectsProps = {
   items: Project[];
@@ -22,11 +29,47 @@ function initials(title: string) {
 export function Projects({ items: projects }: ProjectsProps) {
   const [selectedCategory, setSelectedCategory] = useState("Featured");
   const [currentPage, setCurrentPage] = useState(1);
+  const [carousel, setCarousel] = useState<CarouselState | null>(null);
+
+  const openCarousel = (project: Project, startIndex = 0) => {
+    if (!project.img?.length) return;
+    setCarousel({ images: project.img, index: startIndex, title: project.title });
+  };
+
+  const closeCarousel = useCallback(() => setCarousel(null), []);
+
+  const goNext = useCallback(() => {
+    setCarousel((prev) =>
+      prev ? { ...prev, index: (prev.index + 1) % prev.images.length } : prev,
+    );
+  }, []);
+
+  const goPrev = useCallback(() => {
+    setCarousel((prev) =>
+      prev
+        ? { ...prev, index: (prev.index - 1 + prev.images.length) % prev.images.length }
+        : prev,
+    );
+  }, []);
+
+  // Keyboard navigation
+  useEffect(() => {
+    if (!carousel) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeCarousel();
+      if (e.key === "ArrowRight") goNext();
+      if (e.key === "ArrowLeft") goPrev();
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [carousel, closeCarousel, goNext, goPrev]);
 
   const categories = useMemo(() => {
-    return ["Featured", "All"].filter(
-      (category, index, list) => list.indexOf(category) === index,
-    );
+    const fixed = ["Featured", "All", "Backend", "Mobile"];
+ 
+  
+    const all = [...fixed];
+    return all.filter((c, i, list) => list.indexOf(c) === i);
   }, [projects]);
 
   const filteredProjects =
@@ -68,56 +111,84 @@ export function Projects({ items: projects }: ProjectsProps) {
 
       <div className="projects">
         {currentProjects.length ? (
-          currentProjects.map((project, i) => (
-            <div
-              key={project.title}
-              className="proj"
-              style={{ animationDelay: `${i * 0.07}s` }}
-            >
+          currentProjects.map((project, i) => {
+            const isBackend = selectedCategory === "Backend";
+            const displayStack = isBackend
+              ? (project["be-stack"] ?? project.stack)
+              : project.stack;
+            const displayGit = isBackend
+              ? (project["be-git"] ?? project.git)
+              : project.git;
+            const displayDescription = isBackend
+              ? (project["be-description"] ?? project.description)
+              : project.description;
+            const displayImg = project.img?.[0];
+
+            return (
               <div
-                className="thumb"
-                style={
-                  project.img
-                    ? {
-                        backgroundImage: `url(${project.img})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                      }
-                    : undefined
-                }
+                key={project.title}
+                className="proj"
+                style={{ animationDelay: `${i * 0.07}s` }}
               >
-                {project.img ? null : initials(project.title)}
+                <div
+                  className={`thumb${displayImg ? " thumb-clickable" : ""}`}
+                  style={
+                    displayImg
+                      ? {
+                          backgroundImage: `url(${displayImg})`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                        }
+                      : undefined
+                  }
+                  onClick={displayImg ? () => openCarousel(project, 0) : undefined}
+                  role={displayImg ? "button" : undefined}
+                  tabIndex={displayImg ? 0 : undefined}
+                  aria-label={displayImg ? `View ${project.title} images` : undefined}
+                  onKeyDown={
+                    displayImg
+                      ? (e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            openCarousel(project, 0);
+                          }
+                        }
+                      : undefined
+                  }
+                >
+                  {displayImg ? null : initials(project.title)}
+                </div>
+                <div className="p-info">
+                  <h3>{project.title}</h3>
+                  <p>{displayDescription}</p>
+                  {displayStack?.length ? (
+                    <div className="p-tags flex flex-wrap">
+                      {displayStack.map((tag) => (
+                        <span key={tag}>{tag}</span>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+                <div className="p-links">
+                  {project.link ? (
+                    <a
+                      className="live"
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      Live
+                    </a>
+                  ) : null}
+                  {displayGit ? (
+                    <a href={displayGit} target="_blank" rel="noopener">
+                      GitHub
+                    </a>
+                  ) : null}
+                </div>
               </div>
-              <div className="p-info">
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-                {project.stack?.length ? (
-                  <div className="p-tags">
-                    {project.stack.slice(0, 6).map((tag) => (
-                      <span key={tag}>{tag}</span>
-                    ))}
-                  </div>
-                ) : null}
-              </div>
-              <div className="p-links">
-                {project.link ? (
-                  <a
-                    className="live"
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    Live
-                  </a>
-                ) : null}
-                {project.git ? (
-                  <a href={project.git} target="_blank" rel="noopener">
-                    GitHub
-                  </a>
-                ) : null}
-              </div>
-            </div>
-          ))
+            );
+          })
         ) : (
           <p className="project-empty">No projects in this category.</p>
         )}
@@ -153,6 +224,86 @@ export function Projects({ items: projects }: ProjectsProps) {
           >
             Next
           </button>
+        </div>
+      ) : null}
+
+      {/* ── Carousel modal ──────────────────────────────────────────── */}
+      {carousel ? (
+        <div
+          className="carousel-overlay"
+          onClick={closeCarousel}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${carousel.title} image carousel`}
+        >
+          <div className="carousel-box" onClick={(e) => e.stopPropagation()}>
+            {/* Close */}
+            <button
+              type="button"
+              className="carousel-close"
+              onClick={closeCarousel}
+              aria-label="Close carousel"
+            >
+              ✕
+            </button>
+
+            {/* Image */}
+            <div className="carousel-img-wrap">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                key={carousel.images[carousel.index]}
+                src={carousel.images[carousel.index]}
+                alt={`${carousel.title} — image ${carousel.index + 1} of ${carousel.images.length}`}
+                className="carousel-img"
+              />
+            </div>
+
+            {/* Nav arrows (only shown when >1 image) */}
+            {carousel.images.length > 1 ? (
+              <>
+                <button
+                  type="button"
+                  className="carousel-arrow carousel-arrow-prev"
+                  onClick={goPrev}
+                  aria-label="Previous image"
+                >
+                  ‹
+                </button>
+                <button
+                  type="button"
+                  className="carousel-arrow carousel-arrow-next"
+                  onClick={goNext}
+                  aria-label="Next image"
+                >
+                  ›
+                </button>
+              </>
+            ) : null}
+
+            {/* Dots */}
+            {carousel.images.length > 1 ? (
+              <div className="carousel-dots">
+                {carousel.images.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    className={`carousel-dot${i === carousel.index ? " active" : ""}`}
+                    onClick={() =>
+                      setCarousel((prev) => (prev ? { ...prev, index: i } : prev))
+                    }
+                    aria-label={`Go to image ${i + 1}`}
+                  />
+                ))}
+              </div>
+            ) : null}
+
+            {/* Counter */}
+            {carousel.images.length > 1 ? (
+              <p className="carousel-counter">
+                {carousel.index + 1} / {carousel.images.length}
+              </p>
+            ) : null}
+          </div>
         </div>
       ) : null}
     </section>
